@@ -53,7 +53,7 @@ opts = Trollop::options do
   opt :tld, "Top-level domain (e.g. 'org')", :type => :string, :default => 'com'
   opt :domain_prefix, 'Domain prefix', :type => :string
   opt :domain_suffix, 'Domain suffix', :type => :string
-  opt :permutation_length, 'Suffix/prefix permutation length', :type => :integer, :default => 2
+  opt :permutation_length, 'Suffix/prefix permutation length', :type => :integer, :default => 1
 end
 
 PermutationGenerator.new(opts).start!
