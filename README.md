@@ -1,23 +1,29 @@
-Permutation-based usage:
+#### Dictionary-based usage (TODO - implementation in progress)
 
 ```
-ruby domaingen.rb --domain-prefix=hello --permutation-length=2
+ruby domaingen.rb --type=dictionary --domain-prefix=hello
 ```
 
 ```
-helloaa.com unavailable
-helloab.com unavailable
-helloac.com unavailable
-helload.com unavailable
-helloae.com unavailable
-helloaf.com unavailable
-helloag.com available
-helloah.com available
-helloai.com unavailable
-helloaj.com unavailable
+helloability.com available
+helloable.com unavailable
+helloaboard.com available
+helloabout.com unavailable
+helloabove.com unavailable
 ...
 ```
 
-Dictionary-based usage:
+#### Character permutation-based usage
 
-TODO
+```
+ruby domaingen.rb --type=permutation --domain-suffix=hello --permutation-length=2
+```
+
+```
+aahello.com unavailable
+abhello.com available
+achello.com available
+adhello.com unavailable
+aehello.com available
+...
+```
