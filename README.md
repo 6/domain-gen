@@ -1,7 +1,7 @@
 Example usage:
 
 ```
-ruby domaingen.rb --domain-prefix=hello
+ruby domaingen.rb --domain-prefix=hello --permutation-length=2
 ```
 
 ```
