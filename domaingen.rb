@@ -5,7 +5,7 @@ class DomainGenerator
   attr_reader :whois, :options, :tld
   attr_accessor :available_domains, :index
   def initialize(options = {})
-    @whois = Whois::Client.new
+    @whois = Whois::Client.new(timeout: 10)
     @options = options
     @tld = "." + options[:tld]
     @available_domains = []
@@ -36,7 +36,7 @@ class PermutationGenerator < DomainGenerator
         options[:domain_prefix] + letters
       end + tld
       check(domain)
-      sleep 0.5
+      sleep 1
       @index += 1
     end
     before_exit
