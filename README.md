@@ -1,4 +1,4 @@
-Example usage:
+Permutation-based usage:
 
 ```
 ruby domaingen.rb --domain-prefix=hello --permutation-length=2
@@ -17,3 +17,7 @@ helloai.com unavailable
 helloaj.com unavailable
 ...
 ```
+
+Dictionary-based usage:
+
+TODO
