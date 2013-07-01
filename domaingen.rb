@@ -1,5 +1,6 @@
 require 'whois'
 require 'trollop'
+require 'colored'
 
 class DomainGenerator
   attr_reader :whois, :options, :tld
@@ -14,10 +15,10 @@ class DomainGenerator
 
   def check(domain)
     if @whois.lookup(domain).available?
-      puts "#{index}. #{domain} available"
+      puts "#{index}. #{domain} available".green
       available_domains << domain
     else
-      puts "#{index}. #{domain} unavailable"
+      puts "#{index}. #{domain} unavailable".red
     end
   end
 
