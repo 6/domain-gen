@@ -1,6 +1,7 @@
 require 'whois'
 require 'trollop'
 require 'colored'
+require "retries"
 
 class DomainGenerator
   attr_reader :whois, :options, :tld
@@ -14,11 +15,13 @@ class DomainGenerator
   end
 
   def check(domain)
-    if @whois.lookup(domain).available?
-      puts "#{index}. #{domain} available".green
-      available_domains << domain
-    else
-      puts "#{index}. #{domain} unavailable".red
+    with_retries(:max_tries => 2, :rescue => Timeout::Error) do
+      if @whois.lookup(domain).available?
+        puts "#{index}. #{domain} available".green
+        available_domains << domain
+      else
+        puts "#{index}. #{domain} unavailable".red
+      end
     end
   end
 

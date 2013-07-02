@@ -2,6 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     colored (1.2)
+    retries (0.0.5)
     trollop (2.0)
     whois (3.2.0)
 
@@ -10,5 +11,6 @@ PLATFORMS
 
 DEPENDENCIES
   colored
+  retries
   trollop
   whois
