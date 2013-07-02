@@ -1,13 +1,20 @@
-require 'whois'
 require 'trollop'
 require 'colored'
 require "retries"
+require 'rest-client'
+require 'json'
+
+class Whois
+  def self.available?(domain)
+    response = RestClient.get("http://domai.nr/api/json/info?q=#{domain}", :user_agent => "https://github.com/6/domain-gen")
+    JSON.parse(response)['availability'] == "available"
+  end
+end
 
 class DomainGenerator
-  attr_reader :whois, :options, :tld
+  attr_reader :options, :tld
   attr_accessor :available_domains, :index
   def initialize(options = {})
-    @whois = Whois::Client.new(timeout: 10)
     @options = options
     @tld = "." + options[:tld]
     @available_domains = []
@@ -15,8 +22,8 @@ class DomainGenerator
   end
 
   def check(domain)
-    with_retries(:max_tries => 2, :rescue => Timeout::Error) do
-      if @whois.lookup(domain).available?
+    with_retries(:max_tries => 2, :rescue => RestClient::RequestTimeout) do
+      if Whois.available?(domain)
         puts "#{index}. #{domain} available".green
         available_domains << domain
       else
