@@ -1,4 +1,4 @@
-#### Dictionary-based usage (TODO - implementation in progress)
+#### Dictionary-based usage
 
 ```
 ruby domaingen.rb --type=dictionary --domain-prefix=hello
