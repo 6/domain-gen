@@ -28,7 +28,7 @@ class DomainGenerator
         puts "#{index}. #{domain} available".green
         available_domains << domain
       else
-        puts "#{index}. #{domain} unavailable".red
+        puts "#{index}. #{domain} unavailable".red  unless options[:hide_unavailable]
       end
     end
   end
@@ -96,6 +96,7 @@ opts = Trollop::options do
   opt :start_index, 'Starting point of search', :type => :integer, :default => 0
   opt :type, 'Type of domain generation to use: `permutation` or `dictionary`', :type => :string
   opt :max_word_length, 'Maximum word length for dictionary-based generation', :type => :integer
+  opt :hide_unavailable, 'Only show available domains', :type => :boolean, :default => false
 end
 
 if opts[:type] == 'dictionary'
