@@ -80,7 +80,11 @@ class DictionaryGenerator < DomainGenerator
   private
 
   def words
-    @words ||= JSON.parse(File.read('./xkcd_words.json'))
+    words = JSON.parse(File.read('./xkcd_words.json'))
+    if options[:max_word_length]
+      words.select! { |word| word.size < options[:max_word_length] }
+    end
+    words
   end
 end
 
@@ -91,6 +95,7 @@ opts = Trollop::options do
   opt :permutation_length, 'Suffix/prefix permutation length', :type => :integer, :default => 1
   opt :start_index, 'Starting point of search', :type => :integer, :default => 0
   opt :type, 'Type of domain generation to use: `permutation` or `dictionary`', :type => :string
+  opt :max_word_length, 'Maximum word length for dictionary-based generation', :type => :integer
 end
 
 if opts[:type] == 'dictionary'
