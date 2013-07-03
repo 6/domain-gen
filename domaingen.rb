@@ -64,7 +64,7 @@ end
 
 class DictionaryGenerator < DomainGenerator
   def start!
-    words.each do |word|
+    words[index..-1].each do |word|
       domain = if options[:domain_suffix]
         word + options[:domain_suffix]
       else
